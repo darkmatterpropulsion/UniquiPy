@@ -2,8 +2,6 @@ import hashlib
 from pathlib import Path
 import os
 import shutil
-import argparse
-import sys
 import yaml
 
 
@@ -81,7 +79,7 @@ def main():
 				hash = []
 				hash = createDir(''.join(map(str,pathToWrite)) + "/" + key)				
 				hashes[key] = hash	
-	print(hashes)	
+	
 
 	for path in pathsToCheck:
 		allThePaths.extend(searchPath(path))
