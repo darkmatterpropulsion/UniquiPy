@@ -3,7 +3,7 @@
     - "/home/darkmatterpropulsion/Documents/testDir/testInputDir1"
     - "/home/darkmatterpropulsion/Documents/testDir/testInputDir2"
     - "/home/darkmatterpropulsion/Documents/testDir/testInputDir3"
-  destination: #add in here the path to the directory to be used to write the files found
+  destination: #add in here the path to the directory to be used to write the all the found files
     - "/home/darkmatterpropulsion/Documents/testDir/testOutputDir"
   extensions: #in here add the label and the list of extensions underneath it. The files with the extension  
               #that match the one under a label will be written in a folder with the name given by that label.
