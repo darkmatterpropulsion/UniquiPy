@@ -6,7 +6,7 @@ UniquiPy is a Python tool designed to efficiently organize and manage files from
 - Allows users to defines custom files types and directory stucture for a more flexible organization
 - Very intuitive command line interface for ease to use
 
-###Usage
+### Usage
 Clone the repo
 '''
 git clone https://github.com/darkmatterpropulsion/UniquiPy.git && cd UniquiPy
