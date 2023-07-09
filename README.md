@@ -8,10 +8,14 @@ UniquiPy is a Python tool designed to efficiently organize and manage files from
   
 ### Usage
 Clone the repo
-'''
+
+`'''
 git clone https://github.com/darkmatterpropulsion/UniquiPy.git && cd UniquiPy
-'''
+'''`
+
 Once in the folder, open the "uniquipy.yaml" with your preferred editor and edit the lines as described by the comments and then run the script
-'''
+
+`'''
 python uniquipy.py
 '''
+`
