@@ -141,7 +141,7 @@ def write_files(all_the_paths, data, hashes, path_to_write):
                         )
                         print(
                             (
-                                colored("[+]","green")
+                                "[+]"
                                 + " Writing "
                                 + "".join(map(str, path_to_write))
                                 + "/"
