@@ -185,12 +185,10 @@ def main():
         with open("uniquiPy.yaml", "r") as f:
             data = yaml.safe_load(f)
             hashes, path_to_write, paths_to_check = parse_configuration(data)
-    except FileNotFoundError:
-        print("[-] The configuration file uniquiPy.yaml was not found.")
-        sys.exit(-1)
     except Exception as e:
         print("An error has occurred while reading the configuration file: " + str(e))
-        
+        sys.exit(-1)
+                
     all_the_files = search_for_files(paths_to_check)
 
     write_files(all_the_files, data, hashes, path_to_write)
