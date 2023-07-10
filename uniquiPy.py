@@ -19,7 +19,7 @@ def fingerprint(path):
                 hash_method.update(buf)
                 buf = input_file.read(BLOCK_SIZE)
     except Exception as e:
-        print(f"[-] An error occurred while opening {path} for hashing: " + e)
+        print(f"[-] An error occurred while opening {path} for hashing: " + str(e))
         return ''
     return hash_method.hexdigest()
 
@@ -84,7 +84,7 @@ def create_dir(path):
             print("[!] It appears that the file already exists but was not detected.")
             return generate_folder_hash(path)
         except Exception as e:
-            print(f"[-] An error has occurred while checking existence of {path}" + e)
+            print(f"[-] An error has occurred while checking existence of {path}" + str(e))
             return []
     else:
         return generate_folder_hash(path)
@@ -131,7 +131,8 @@ def copy_files(path,path_to_write,key,file_name,file_extension):
             + file_extension,
             )
     except Exception as e:
-        print(f"[-] An error has occurred while copying {path} " + e)
+        print(f"[-] An error has occurred while copying {path} " + str(e))
+        return
 
     print(
         "[+]"
@@ -188,7 +189,7 @@ def main():
         print("[-] The configuration file uniquiPy.yaml was not found.")
         sys.exit(-1)
     except Exception as e:
-        print("An error has occurred while reading the configuration file: " + e)
+        print("An error has occurred while reading the configuration file: " + str(e))
         
     all_the_files = search_for_files(paths_to_check)
 
