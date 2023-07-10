@@ -135,7 +135,7 @@ def copy_files(path,path_to_write,key,file_name,file_extension):
         return
 
     print(
-        "[+]"
+        ("[+]"
         + " Writing "
         + "".join(map(str, path_to_write))
         + "/"
@@ -143,7 +143,7 @@ def copy_files(path,path_to_write,key,file_name,file_extension):
         + "/"
         + file_name
         + file_extension
-        ).encode(encoding="UTF-8", errors="strict")
+        ).encode(encoding="UTF-8", errors="strict"))
 
 '''
  This last block check if each file in all_the_files is unique and if it is so,
