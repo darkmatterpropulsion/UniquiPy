@@ -119,6 +119,30 @@ def search_for_files(paths_to_check):
         all_the_files.extend(search_path(path))
     return all_the_files
 
+def copy_files(path,path_to_write,key,file_name,file_extension):
+    try:
+        shutil.copyfile(
+            path,
+            "".join(map(str, path_to_write))
+            + "/"
+            + f"{key}"
+            + "/"
+            + file_name
+            + file_extension,
+            )
+    except Exception as e:
+        print(f"[-] An error has occurred while copying {path} " + e)
+
+    print(
+        "[+]"
+        + " Writing "
+        + "".join(map(str, path_to_write))
+        + "/"
+        + f"{key}"
+        + "/"
+        + file_name
+        + file_extension
+        ).encode(encoding="UTF-8", errors="strict")
 
 '''
  This last block check if each file in all_the_files is unique and if it is so,
@@ -132,27 +156,7 @@ def write_files(all_the_files, data, hashes, path_to_write):
                 if file_extension in values:
                     unique, hashes[key] = is_unique(path, hashes, key)
                     if unique:
-                        shutil.copyfile(
-                            path,
-                            "".join(map(str, path_to_write))
-                            + "/"
-                            + f"{key}"
-                            + "/"
-                            + file_name
-                            + file_extension,
-                        )
-                        print(
-                            (
-                                "[+]"
-                                + " Writing "
-                                + "".join(map(str, path_to_write))
-                                + "/"
-                                + f"{key}"
-                                + "/"
-                                + file_name
-                                + file_extension
-                            ).encode(encoding="UTF-8", errors="strict")
-                        )
+                            copy_files(path,path_to_write,key,file_name,file_extension)
                     else:
                         print(
                             (
