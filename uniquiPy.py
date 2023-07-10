@@ -8,7 +8,7 @@ import yaml
 BLOCK_SIZE = 65536
 
 ''' The following function calculates the sha256 hash of a file specified in "path" argument.
- The hashes is calculated in blocks to avoid reading large files that could potentially fill the memory and crash the program.'''
+ The hash is calculated in blocks to avoid reading large files that could potentially fill the memory and crash the program.'''
 def fingerprint(path):
     hash_method = hashlib.sha256()
     with open(path, "rb") as input_file:
@@ -35,7 +35,7 @@ def search_path(base_path):
  - hashes: the dictionary containing the hashes
  - key: A string containing the label to access the dictionary
  With this argument in input the function checks if the file's hash has been
- already calculated (if it is a duplicate) or not. If the hash was not found
+ already calculated (if it is, the file is a duplicate) or not. If the hash was not found
  previously, the function add to the hashes dictionary this new value.
  '''
 def is_unique(path, hashes, key):
@@ -48,7 +48,7 @@ def is_unique(path, hashes, key):
 
 '''
  The following function takes the path, that is a string like
- /This/is/the/directory/to/a/file.extension and return the files name without the base path and
+ /This/is/the/directory/to/a/file.extension and return the files name and
  the file extension.
 '''
 def get_file_name_and_extension(path):
