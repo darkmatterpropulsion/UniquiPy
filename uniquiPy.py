@@ -3,9 +3,10 @@ from pathlib import Path
 import os
 import shutil
 import yaml
+import sys
 
 
-BLOCK_SIZE = 65536
+function_SIZE = 65536
 
 ''' The following function calculates the sha256 hash of a file specified in "path" argument.
  The hash is calculated in blocks to avoid reading large files that could potentially fill the memory and crash the program.'''
@@ -14,12 +15,12 @@ def fingerprint(path):
 
     try:
         with open(path, "rb") as input_file:
-            buf = input_file.read(BLOCK_SIZE)
+            buf = input_file.read(function_SIZE)
             while len(buf) > 0:
                 hash_method.update(buf)
-                buf = input_file.read(BLOCK_SIZE)
+                buf = input_file.read(function_SIZE)
     except Exception as e:
-        print(f"[-] An error occurred while opening {path} for hashing: " + str(e))
+        print(f"[!] An error occurred while opening {path} for hashing: " + str(e))
         return ''
     return hash_method.hexdigest()
 
@@ -53,7 +54,7 @@ def is_unique(path, hashes, key):
 
 '''
  The following function takes the path, that is a string like
- /This/is/the/directory/to/a/file.extension and return the files name and
+ /This/is/the/directory/to/a/file.extension and return the file name and
  the file extension.
 '''
 def get_file_name_and_extension(path):
@@ -62,8 +63,8 @@ def get_file_name_and_extension(path):
     return file_name_pieces[-1], file_extension
 
 '''
-The following function generates and store the hashes of the files inside the folder
-pointed by "path"
+The following function calculate the hashes of the files inside the folder
+pointed by "path" and store them in the list "hash"
 '''
 def generate_folder_hash(path):
     hash = []
@@ -73,7 +74,8 @@ def generate_folder_hash(path):
     return hash
 
 '''
-The following function create a folder specified in "path".
+The following function create the folder specified in "path". If the folder already exists it calculate
+the hashes of the files inside of it.
 '''
 def create_dir(path):
     if not os.path.exists(path):
@@ -84,16 +86,15 @@ def create_dir(path):
             print("[!] It appears that the file already exists but was not detected.")
             return generate_folder_hash(path)
         except Exception as e:
-            print(f"[-] An error has occurred while checking existence of {path}" + str(e))
+            print(f"[!] An error has occurred while checking existence of {path}" + str(e))
             return []
     else:
         return generate_folder_hash(path)
 
 '''
- The following block read the configuration file
+ The following function read the configuration file
  and create a dictionary with the keys given by the label
- specified in the yaml files. The block also attempt to create
- the directory structor to write the files.
+ specified in the yaml files.
 '''
 def parse_configuration(data):
     paths_to_check = []
@@ -110,7 +111,7 @@ def parse_configuration(data):
     return hashes, path_to_write, paths_to_check
 
 '''
- This block searches for all the files inside the sources directory and stores
+ This function searches for all the files inside the sources directory and stores
  them in a list
 '''
 def search_for_files(paths_to_check):
@@ -119,6 +120,9 @@ def search_for_files(paths_to_check):
         all_the_files.extend(search_path(path))
     return all_the_files
 
+'''
+This function copies a file from path to the directory path_to_write/key
+'''
 def copy_files(path,path_to_write,key,file_name,file_extension):
     try:
         shutil.copyfile(
@@ -131,7 +135,7 @@ def copy_files(path,path_to_write,key,file_name,file_extension):
             + file_extension,
             )
     except Exception as e:
-        print(f"[-] An error has occurred while copying {path} " + str(e))
+        print(f"[!] An error has occurred while copying {path} " + str(e))
         return
 
     print(
@@ -146,8 +150,8 @@ def copy_files(path,path_to_write,key,file_name,file_extension):
         ).encode(encoding="UTF-8", errors="strict"))
 
 '''
- This last block check if each file in all_the_files is unique and if it is so,
- it is written to the directory where it belong.
+ This  function check if each file in all_the_files is unique and if it is so,
+ it is written to the directory as specified in the yaml file.
 '''
 def write_files(all_the_files, data, hashes, path_to_write):
     for path in all_the_files:

@@ -60,6 +60,12 @@
       - ".ppt"
       - ".pptx"
       - ".txt"
-  
+  - foo:
+      - ".aa"
+      - ".gg"
+      - ".ecc"
+  - bar:
+      - ".hh"
+      - ".whatever"
 
 
