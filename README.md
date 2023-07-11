@@ -13,7 +13,7 @@ Clone the repo
 git clone https://github.com/darkmatterpropulsion/UniquiPy.git && cd UniquiPy
 `
 
-Once in the folder, open the "uniquipy.yaml" with your preferred editor and edit the lines as described by the comments and then run the script
+Once in the folder, open the "uniquipy.yaml" with your preferred editor and edit the lines as described by the comments, then run the script with 
 
 `
 python uniquipy.py
