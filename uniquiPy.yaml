@@ -7,7 +7,7 @@
     - "/home/darkmatterpropulsion/Documents/testDir/testOutputDir"
   extensions: #in here add the label and the list of extensions underneath it. The files with the extension  
               #that match the one under a label will be written in a folder with the name given by that label.
-              #For example: all the file that end in .jpeg will be written to a folder called "image"
+              #For example: all the files that end in .jpeg will be written to a folder called "image"
   - image:
       - ".jpeg"
       - ".jpg"
